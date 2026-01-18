@@ -58,6 +58,7 @@ describe('SauceDemo Authentication and Checkout Flow', () => {
     cy.contains('Products').should('be.visible');
   });
 
+  
   // =========================
   // CHECKOUT VALIDATION (NEGATIVE)
   // =========================
@@ -76,7 +77,18 @@ describe('SauceDemo Authentication and Checkout Flow', () => {
       cy.get('[data-test="checkout"]').click();
 
       cy.contains('Checkout: Your Information').should('be.visible');
-    });
+
+       // Verify firstname is required
+    cy.get('[data-test="lastName"]').type('Youverify');
+    cy.get('[data-test="postalCode"]').type('100001');
+    cy.get('[data-test="continue"]').click();
+    
+
+     // Verify lastname is required
+    cy.get('[data-test="firstName"]').type('Okikiola');
+    cy.get('[data-test="postalCode"]').type('100001');
+    cy.get('[data-test="continue"]').click();
+  });
 
 });
   // =========================
@@ -123,5 +135,6 @@ describe('SauceDemo Authentication and Checkout Flow', () => {
     cy.contains('Checkout: Complete!').should('be.visible');
     cy.contains('Thank you for your order').should('be.visible');
   });
+  });
 
-});
+
